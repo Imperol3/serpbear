@@ -1,8 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { Toaster } from 'react-hot-toast';
-import { CSSTransition } from 'react-transition-group';
 import { FixedSizeList as List, ListChildComponentProps } from 'react-window';
-import AddKeywords from './AddKeywords';
 import { filterKeywords, keywordsByDevice, sortKeywords } from '../../utils/client/sortFilter';
 import Icon from '../common/Icon';
 import Keyword from './Keyword';
@@ -25,7 +23,7 @@ type KeywordsTableProps = {
 }
 
 const KeywordsTable = (props: KeywordsTableProps) => {
-   const { domain, keywords = [], isLoading = true, showAddModal = false, setShowAddModal, isConsoleIntegrated = false } = props;
+   const { keywords = [], isLoading = true, isConsoleIntegrated = false } = props;
    const showSCData = isConsoleIntegrated;
    const [device, setDevice] = useState<string>('desktop');
    const [selectedKeywords, setSelectedKeywords] = useState<number[]>([]);
@@ -61,7 +59,7 @@ const KeywordsTable = (props: KeywordsTableProps) => {
    }, [keywords, device, sortBy, filterParams, scDataType]);
 
    const allDomainTags: string[] = useMemo(() => {
-      const allTags = keywords.reduce((acc: string[], keyword) => [...acc, ...keyword.tags], []);
+      const allTags = keywords.reduce((acc: string[], keyword) => [...acc, ...keyword.tags], []).filter((t) => t && t.trim() !== '');
       return [...new Set(allTags)];
    }, [keywords]);
 
@@ -99,7 +97,7 @@ const KeywordsTable = (props: KeywordsTableProps) => {
 
    return (
       <div>
-         <div className='domKeywords flex flex-col bg-[white] rounded-md text-sm border mb-8'>
+         <div className='domKeywords flex flex-col bg-[white] rounded-md text-sm border mb-5'>
             {selectedKeywords.length > 0 && (
                <div className='font-semibold text-sm py-4 px-8 text-gray-500 '>
                   <ul className=''>
@@ -160,9 +158,10 @@ const KeywordsTable = (props: KeywordsTableProps) => {
                      </span>
                      <span className='domKeywords_head_position flex-1 basis-24 grow-0 text-center'>Position</span>
                      <span className='domKeywords_head_best flex-1 basis-16 grow-0 text-center'>Best</span>
-                     <span className='domKeywords_head_history flex-1 basis-32 grow-0 '>History (7d)</span>
+                     <span className='domKeywords_head_history flex-1 basis-20 grow-0'>History (7d)</span>
+                     <span className='domKeywords_head_volume flex-1 basis-24 grow-0 text-center'>Volume</span>
                      <span className='domKeywords_head_url flex-1'>URL</span>
-                     <span className='domKeywords_head_updated flex-1'>Updated</span>
+                     <span className='domKeywords_head_updated flex-1 relative left-3'>Updated</span>
                      {showSCData && (
                         <div className='domKeywords_head_sc flex-1 min-w-[170px] mr-7 text-center'>
                            {/* Search Console */}
@@ -243,13 +242,6 @@ const KeywordsTable = (props: KeywordsTableProps) => {
                   </div>
             </Modal>
          )}
-         <CSSTransition in={showAddModal} timeout={300} classNames="modal_anim" unmountOnExit mountOnEnter>
-            <AddKeywords
-               domain={domain?.domain || ''}
-               keywords={keywords}
-               closeModal={() => setShowAddModal(false)}
-               />
-         </CSSTransition>
          {showTagManager && (
             <KeywordTagManager
                allTags={allDomainTags}
@@ -259,6 +251,7 @@ const KeywordsTable = (props: KeywordsTableProps) => {
          )}
          {showAddTags && (
             <AddTags
+               existingTags={allDomainTags}
                keywords={keywords.filter((k) => selectedKeywords.includes(k.ID))}
                closeModal={() => setShowAddTags(false)}
                />

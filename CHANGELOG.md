@@ -2,6 +2,79 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.0.2](https://github.com/towfiqi/serpbear/compare/v2.0.1...v2.0.2) (2024-03-13)
+
+
+### Bug Fixes
+
+* Resolves Broken Google Adwords Authentication in Docker containers. ([1d0a788](https://github.com/towfiqi/serpbear/commit/1d0a78881039b3ebd4b1e00fb067016886d49c31)), closes [#179](https://github.com/towfiqi/serpbear/issues/179)
+
+### [2.0.1](https://github.com/towfiqi/serpbear/compare/v2.0.0...v2.0.1) (2024-03-06)
+
+
+### Bug Fixes
+
+* Resolves broken doc links ([d48ae76](https://github.com/towfiqi/serpbear/commit/d48ae76103615ab82a32cbd8ffa62e27d17999de))
+* Resolves keyword loading issue in Docker instances. ([4a87d22](https://github.com/towfiqi/serpbear/commit/4a87d229fee7aa5e0ca8b2042c168465c7c5d67f)), closes [#178](https://github.com/towfiqi/serpbear/issues/178)
+
+## [2.0.0](https://github.com/towfiqi/serpbear/compare/v1.0.3...v2.0.0) (2024-03-05)
+
+
+### Features
+
+* Adds a Keyword Research Section. ([4d15989](https://github.com/towfiqi/serpbear/commit/4d15989b2832c3514fca18f3178a967c1fc9ad18))
+* Adds ability to pick existing tags when applying keyword tags. ([407ab8d](https://github.com/towfiqi/serpbear/commit/407ab8db831b26a5d45ccd7455c39f82fef1e438)), closes [#171](https://github.com/towfiqi/serpbear/issues/171)
+* Adds Google Adwords Integration to allow generating Keyword Ideas. ([5650645](https://github.com/towfiqi/serpbear/commit/5650645b58638e91bd5772415234fdda8cc8de1a))
+* Adds keyword search volume data feature for tracked keywords. ([2a1fc0e](https://github.com/towfiqi/serpbear/commit/2a1fc0e43d31f215b815a9d8b312da080209ae3a))
+* Adds the ability to view the changelog and displays the latest version number. ([bb4a684](https://github.com/towfiqi/serpbear/commit/bb4a6844b522067b69a007fda427d16d25bae3a3))
+
+
+### Bug Fixes
+
+* Resolves Domain keyword Ideas generation issue. ([252ae9a](https://github.com/towfiqi/serpbear/commit/252ae9aa84177909f5658d954ca1231c70cb9145))
+* Resolves minor UI bugs. ([50160f5](https://github.com/towfiqi/serpbear/commit/50160f5b234fc783802efae34db4a8f959745998))
+
+### [1.0.3](https://github.com/towfiqi/serpbear/compare/v1.0.2...v1.0.3) (2024-02-22)
+
+
+### Bug Fixes
+
+* Resolves App not reloading on Scraper setup. ([56ffbf5](https://github.com/towfiqi/serpbear/commit/56ffbf59d1e459a6c7229d141ccc6774dc8055d0))
+* Resolves large keywords breaking the keywords table ui ([724d3c8](https://github.com/towfiqi/serpbear/commit/724d3c8d4309c7bd4f40e9db980ad54f99023d35))
+* Resolves scraper not able to scrape some keywords correctly. ([9a7a43f](https://github.com/towfiqi/serpbear/commit/9a7a43f051387cacc13116c0a7c21716b54e539b))
+
+### [1.0.2](https://github.com/towfiqi/serpbear/compare/v1.0.1...v1.0.2) (2024-02-15)
+
+
+### Bug Fixes
+
+* Resolves Incorrect Position issue. ([0e64b95](https://github.com/towfiqi/serpbear/commit/0e64b95cd5303525535ea84a77181281d7f5618e)), closes [#164](https://github.com/towfiqi/serpbear/issues/164)
+
+### [1.0.1](https://github.com/towfiqi/serpbear/compare/v1.0.0...v1.0.1) (2024-02-13)
+
+
+### Bug Fixes
+
+* Resolves the app crash issue when there is no database. ([e5dd411](https://github.com/towfiqi/serpbear/commit/e5dd411aa9aef58ebb226f2b793a2632ab9069a7)), closes [#161](https://github.com/towfiqi/serpbear/issues/161) [#162](https://github.com/towfiqi/serpbear/issues/162)
+
+## [1.0.0](https://github.com/towfiqi/serpbear/compare/v0.3.4...v1.0.0) (2024-02-09)
+
+
+### Features
+
+* Adds Serper.dev integration ([b4ad69b](https://github.com/towfiqi/serpbear/commit/b4ad69baaa0f865938f8b0eace6732a9e6b1b381)), closes [#138](https://github.com/towfiqi/serpbear/issues/138)
+* Adds the ability for city level scraping for scapers that allow it. ([3719f21](https://github.com/towfiqi/serpbear/commit/3719f21d98d173219cef5656579fa0e5340ccdbf)), closes [#139](https://github.com/towfiqi/serpbear/issues/139) [#151](https://github.com/towfiqi/serpbear/issues/151)
+* adds the ability to add url as a domain. ([3c2a1b8](https://github.com/towfiqi/serpbear/commit/3c2a1b8a5b8a2a4a2179a5031582f8202c2e494a)), closes [#53](https://github.com/towfiqi/serpbear/issues/53) [#90](https://github.com/towfiqi/serpbear/issues/90) [#119](https://github.com/towfiqi/serpbear/issues/119)
+* Adds the Ability to set Search Console Property type via Domain Settings. ([b2e97b2](https://github.com/towfiqi/serpbear/commit/b2e97b2ebec380f0edf7ddc0640c2126eff006ac)), closes [#50](https://github.com/towfiqi/serpbear/issues/50)
+* Adds the ability to setup Search Console through the UI. ([f04b10c](https://github.com/towfiqi/serpbear/commit/f04b10cf6b065e3023965112a60e0aa702212a4b)), closes [#59](https://github.com/towfiqi/serpbear/issues/59) [#146](https://github.com/towfiqi/serpbear/issues/146)
+* Adds ValueSerp Integration. ([1041cb3](https://github.com/towfiqi/serpbear/commit/1041cb3c0bb69e9034696624e03433be28e83ac6)), closes [#105](https://github.com/towfiqi/serpbear/issues/105) [#106](https://github.com/towfiqi/serpbear/issues/106)
+
+
+### Bug Fixes
+
+* Resolves Keywords filter crashing issue. ([633ab2c](https://github.com/towfiqi/serpbear/commit/633ab2c467be5b7b86d4547ae0c59034e595a42d))
+* Resolves missing Keyword Loading Spinner issue. ([dbf540c](https://github.com/towfiqi/serpbear/commit/dbf540cfdb16ddb02c9d26618e3680d34799f57f))
+
 ### [0.3.4](https://github.com/towfiqi/serpbear/compare/v0.3.3...v0.3.4) (2024-01-15)
 
 

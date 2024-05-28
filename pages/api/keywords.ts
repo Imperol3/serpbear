@@ -7,6 +7,7 @@ import verifyUser from '../../utils/verifyUser';
 import parseKeywords from '../../utils/parseKeywords';
 import { integrateKeywordSCData, readLocalSCData } from '../../utils/searchConsole';
 import refreshAndUpdateKeywords from '../../utils/refresh';
+import { getKeywordsVolume, updateKeywordsVolumeData } from '../../utils/adwords';
 
 type KeywordsGetResponse = {
    keywords?: KeywordType[],
@@ -45,7 +46,7 @@ const getKeywords = async (req: NextApiRequest, res: NextApiResponse<KeywordsGet
    if (!req.query.domain && typeof req.query.domain !== 'string') {
       return res.status(400).json({ error: 'Domain is Required!' });
    }
-   const domain = (req.query.domain as string).replaceAll('-', '.').replaceAll('_', '-');
+   const domain = (req.query.domain as string);
    const integratedSC = process.env.SEARCH_CONSOLE_PRIVATE_KEY && process.env.SEARCH_CONSOLE_CLIENT_EMAIL;
    const domainSCData = integratedSC ? await readLocalSCData(domain) : false;
 
@@ -79,13 +80,14 @@ const addKeywords = async (req: NextApiRequest, res: NextApiResponse<KeywordsGet
       const keywordsToAdd: any = []; // QuickFIX for bug: https://github.com/sequelize/sequelize-typescript/issues/936
 
       keywords.forEach((kwrd: KeywordAddPayload) => {
-         const { keyword, device, country, domain, tags } = kwrd;
+         const { keyword, device, country, domain, tags, city } = kwrd;
          const tagsArray = tags ? tags.split(',').map((item:string) => item.trim()) : [];
          const newKeyword = {
             keyword,
             device,
             domain,
             country,
+            city,
             position: 0,
             updating: true,
             history: JSON.stringify({}),
@@ -102,8 +104,20 @@ const addKeywords = async (req: NextApiRequest, res: NextApiResponse<KeywordsGet
          const newKeywords:Keyword[] = await Keyword.bulkCreate(keywordsToAdd);
          const formattedkeywords = newKeywords.map((el) => el.get({ plain: true }));
          const keywordsParsed: KeywordType[] = parseKeywords(formattedkeywords);
+
+         // Queue the SERP Scraping Process
          const settings = await getAppSettings();
-         refreshAndUpdateKeywords(newKeywords, settings); // Queue the SERP Scraping Process
+         refreshAndUpdateKeywords(newKeywords, settings);
+
+         // Update the Keyword Volume
+         const { adwords_account_id, adwords_client_id, adwords_client_secret, adwords_developer_token } = settings;
+         if (adwords_account_id && adwords_client_id && adwords_client_secret && adwords_developer_token) {
+            const keywordsVolumeData = await getKeywordsVolume(keywordsParsed);
+            if (keywordsVolumeData.volumes !== false) {
+               await updateKeywordsVolumeData(keywordsVolumeData.volumes);
+            }
+         }
+
          return res.status(201).json({ keywords: keywordsParsed });
       } catch (error) {
          console.log('[ERROR] Adding New Keywords ', error);

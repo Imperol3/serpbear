@@ -19,7 +19,13 @@ class Keyword extends Model {
    @Column({ type: DataType.STRING, allowNull: true, defaultValue: 'US' })
    country!: string;
 
-   @Column({ type: DataType.STRING, allowNull: false })
+   @Column({ type: DataType.STRING, allowNull: true, defaultValue: '' })
+   city!: string;
+
+   @Column({ type: DataType.STRING, allowNull: true, defaultValue: '' })
+   latlong!: string;
+
+   @Column({ type: DataType.STRING, allowNull: false, defaultValue: '{}' })
    domain!: string;
 
    // @ForeignKey(() => Domain)
@@ -41,6 +47,9 @@ class Keyword extends Model {
    @Column({ type: DataType.STRING, allowNull: true, defaultValue: JSON.stringify([]) })
    history!: string;
 
+   @Column({ type: DataType.INTEGER, allowNull: false, defaultValue: 0 })
+   volume!: number;
+
    @Column({ type: DataType.STRING, allowNull: true, defaultValue: JSON.stringify([]) })
    url!: string;
 
@@ -58,6 +67,9 @@ class Keyword extends Model {
 
    @Column({ type: DataType.STRING, allowNull: true, defaultValue: 'false' })
    lastUpdateError!: string;
+
+   @Column({ type: DataType.STRING, allowNull: true })
+   settings!: string;
 }
 
 export default Keyword;

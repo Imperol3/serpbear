@@ -149,14 +149,13 @@ export const extractScrapedResult = (content: string, device: string): SearchRes
 
    const $ = cheerio.load(content);
    const hasNumberofResult = $('body').find('#search  > div > div');
-   const searchResult = hasNumberofResult.children();
+   const searchResultItems = hasNumberofResult.find('h3');
    let lastPosition = 0;
 
-   for (let i = 0; i < searchResult.length; i += 1) {
-      if (searchResult[i]) {
-         const title = $(searchResult[i]).find('h3').html();
-         const url = $(searchResult[i]).find('a').attr('href');
-         // console.log(i, url?.slice(0, 40), title?.slice(0, 40));
+   for (let i = 0; i < searchResultItems.length; i += 1) {
+      if (searchResultItems[i]) {
+         const title = $(searchResultItems[i]).html();
+         const url = $(searchResultItems[i]).closest('a').attr('href');
          if (title && url) {
             lastPosition += 1;
             extractedResult.push({ title, url, position: lastPosition });
@@ -187,15 +186,21 @@ export const extractScrapedResult = (content: string, device: string): SearchRes
 
 /**
  * Find in the domain's position from the extracted search result.
- * @param {string} domain - Domain Name to look for.
+ * @param {string} domainURL - URL Name to look for.
  * @param {SearchResult[]} result - The search result array extracted from the Google Search result.
  * @returns {SERPObject}
  */
-export const getSerp = (domain:string, result:SearchResult[]) : SERPObject => {
-   if (result.length === 0 || !domain) { return { postion: 0, url: '' }; }
+export const getSerp = (domainURL:string, result:SearchResult[]) : SERPObject => {
+   if (result.length === 0 || !domainURL) { return { postion: 0, url: '' }; }
+   const URLToFind = new URL(domainURL.includes('https://') ? domainURL : `https://${domainURL}`);
+   const theURL = URLToFind.hostname + URLToFind.pathname;
+   const isURL = URLToFind.pathname !== '/';
    const foundItem = result.find((item) => {
-      const itemDomain = item.url.replace('www.', '').match(/^(?:https?:)?(?:\/\/)?([^/?]+)/i);
-      return itemDomain && itemDomain.includes(domain.replace('www.', ''));
+      const itemURL = new URL(item.url.includes('https://') ? item.url : `https://${item.url}`);
+      if (isURL && `${theURL}/` === itemURL.hostname + itemURL.pathname) {
+         return true;
+      }
+      return URLToFind.hostname === itemURL.hostname;
    });
    return { postion: foundItem ? foundItem.position : 0, url: foundItem && foundItem.url ? foundItem.url : '' };
 };

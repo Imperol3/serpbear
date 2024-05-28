@@ -16,6 +16,7 @@ import { useFetchDomains } from '../../../../services/domains';
 import { useFetchSCInsight } from '../../../../services/searchConsole';
 import SCInsight from '../../../../components/insight/Insight';
 import { useFetchSettings } from '../../../../services/settings';
+import Footer from '../../../../components/common/Footer';
 
 const InsightPage: NextPage = () => {
    const router = useRouter();
@@ -39,6 +40,11 @@ const InsightPage: NextPage = () => {
       return active;
    }, [router.query.slug, domainsData]);
 
+   const domainHasScAPI = useMemo(() => {
+      const doaminSc = activDomain?.search_console ? JSON.parse(activDomain.search_console) : {};
+      return !!(doaminSc?.client_email && doaminSc?.private_key);
+   }, [activDomain]);
+
    return (
       <div className="Domain ">
          {activDomain && activDomain.domain
@@ -51,7 +57,7 @@ const InsightPage: NextPage = () => {
             <Sidebar domains={theDomains} showAddModal={() => setShowAddDomain(true)} />
             <div className="domain_kewywords px-5 pt-10 lg:px-0 lg:pt-8 w-full">
                {activDomain && activDomain.domain
-               && <DomainHeader
+               ? <DomainHeader
                   domain={activDomain}
                   domains={theDomains}
                   showAddModal={() => console.log('XXXXX')}
@@ -60,12 +66,13 @@ const InsightPage: NextPage = () => {
                   scFilter={scDateFilter}
                   setScFilter={(item:string) => setSCDateFilter(item)}
                   />
+                  : <div className='w-full lg:h-[100px]'></div>
                }
                <SCInsight
                isLoading={false}
                domain={activDomain}
                insight={theInsight}
-               isConsoleIntegrated={scConnected}
+               isConsoleIntegrated={scConnected || domainHasScAPI}
                />
             </div>
          </div>
@@ -83,6 +90,7 @@ const InsightPage: NextPage = () => {
          <CSSTransition in={showSettings} timeout={300} classNames="settings_anim" unmountOnExit mountOnEnter>
              <Settings closeSettings={() => setShowSettings(false)} />
          </CSSTransition>
+         <Footer currentVersion={appSettings?.settings?.version ? appSettings.settings.version : ''} />
       </div>
    );
 };

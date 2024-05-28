@@ -131,13 +131,13 @@ const Icon = ({ type, color = 'currentColor', size = 16, title = '', classes = '
          }
          {type === 'star'
             && <svg width={size} viewBox="0 0 24 24" {...xmlnsProps}>
-               <path fill={color} d="M10 1L7 7l-6 .75l4.13 4.62L4 19l6-3l6 3l-1.12-6.63L19 7.75L13 7zm0 2.24l2.34 4.69l4.65.58l-3.18 3.56l.87 5.15L10 14.88l-4.68 2.34l.87-5.15l-3.18-3.56l4.65-.58z"/>
-            </svg>
+                  <path fill={color} d="m12 15.39l-3.76 2.27l.99-4.28l-3.32-2.88l4.38-.37L12 6.09l1.71 4.04l4.38.37l-3.32 2.88l.99 4.28M22 9.24l-7.19-.61L12 2L9.19 8.63L2 9.24l5.45 4.73L5.82 21L12 17.27L18.18 21l-1.64-7.03z"></path>
+               </svg>
          }
          {type === 'star-filled'
             && <svg width={size} viewBox="0 0 24 24" {...xmlnsProps}>
-               <path fill={color} d="M10 1l3 6l6 .75l-4.12 4.62L16 19l-6-3l-6 3l1.13-6.63L1 7.75L7 7z"/>
-            </svg>
+                  <path fill={color} d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2L9.19 8.62L2 9.24l5.45 4.73L5.82 21z"></path>
+               </svg>
          }
          {type === 'link'
             && <svg width={size} viewBox="0 0 20 20" {...xmlnsProps}>
@@ -208,6 +208,26 @@ const Icon = ({ type, color = 'currentColor', size = 16, title = '', classes = '
                   <path d="M130.55 50.479c24.514 0 41.05 10.589 50.479 19.438l36.844-35.974C195.245 12.91 165.798 0 130.55 0C79.49 0 35.393 29.301 13.925 71.947l42.211 32.783c10.59-31.477 39.891-54.251 74.414-54.251" fill="#EB4335" />
                </svg>
          }
+         {type === 'adwords'
+            && <svg {...xmlnsProps} width={size} viewBox="0 0 256 256">
+                  <g>
+                     <path d="M5.888,166.405103 L90.88,20.9 C101.676138,27.2558621 156.115862,57.3844138 164.908138,63.1135172 L79.9161379,208.627448 C70.6206897,220.906621 -5.888,185.040138 5.888,166.396276 L5.888,166.405103 Z" fill="#FBBC04"></path>
+                     <path d="M250.084224,166.401789 L165.092224,20.9055131 C153.210293,1.13172 127.619121,-6.05393517 106.600638,5.62496138 C85.582155,17.3038579 79.182155,42.4624786 91.0640861,63.1190303 L176.056086,208.632961 C187.938017,228.397927 213.52919,235.583582 234.547672,223.904686 C254.648086,212.225789 261.966155,186.175582 250.084224,166.419444 L250.084224,166.401789 Z" fill="#4285F4"></path>
+                     <ellipse fill="#34A853" cx="42.6637241" cy="187.924414" rx="42.6637241" ry="41.6044138"></ellipse>
+                  </g>
+               </svg>
+         }
+         {type === 'keywords'
+            && <svg {...xmlnsProps} width={size} viewBox="0 0 24 24">
+                  <path fill="none" stroke={color} strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 8h14M5 12h14M5 16h6"></path>
+               </svg>
+         }
+         {type === 'integration'
+            && <svg {...xmlnsProps} width={size} viewBox="0 0 24 24">
+                  <path fill="none" stroke={color} strokeWidth={2} d="M10 21c-2.5 2.5-5 2-7 0s-2.5-4.5 0-7l3-3l7 7zm4-18c2.5-2.5 5-2 7.001 0c2.001 2 2.499 4.5 0 7l-3 3L11 6zm-3 7l-2.5 2.5zm3 3l-2.5 2.5z"></path>
+               </svg>
+         }
+
          {type === 'cursor'
             && <svg {...xmlnsProps} width={size} viewBox="0 0 24 24">
                   <path fill="none" stroke={color} strokeWidth="2" d="M6 3l12 11l-5 1l3 5.5l-3 1.5l-3-6l-4 3z"/>
@@ -251,6 +271,41 @@ const Icon = ({ type, color = 'currentColor', size = 16, title = '', classes = '
                   <path d="M15.75 16.5h3v2.25h-3z" fill={color} />
                   <path d="M15.75 12.75h3V15h-3z" fill={color} />
                   <path d="M15.75 9h3v2.25h-3z" fill={color} />
+               </svg>
+         }
+         {type === 'email'
+            && <svg {...xmlnsProps} width={size} viewBox="0 0 24 24">
+                  <path fill={color} d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2zm-2 0l-8 5l-8-5zm0 12H4V8l8 5l8-5z" />
+               </svg>
+         }
+         {type === 'scraper'
+            && <svg {...xmlnsProps} width={size} viewBox="0 0 16 16">
+               <path fill={color} d="M1 3.5A2.5 2.5 0 0 1 3.5 1h7A2.5 2.5 0 0 1 13 3.5v1.53a4.538 4.538 0 0 0-1-.004V5H2v5.5A1.5 1.5 0 0 0 3.5 12h2.954l-.72.72a2.52 2.52 0 0 0-.242.28H3.5A2.5 2.5 0 0 1 1 10.5zm7.931 3.224l-.577-.578a.5.5 0 1 0-.708.708l.745.744c.144-.306.324-.6.54-.874M2 4h10v-.5A1.5 1.5 0 0 0 10.5 2h-7A1.5 1.5 0 0 0 2 3.5zm4.354 2.854a.5.5 0 1 0-.708-.708l-2 2a.5.5 0 0 0 0 .708l2 2a.5.5 0 0 0 .708-.708L4.707 8.5zm6.538-.83c.366.042.471.48.21.742l-.975.975a1.507 1.507 0 1 0 2.132 2.132l.975-.975c.261-.261.7-.156.742.21a3.518 3.518 0 0 1-4.676 3.723l-2.726 2.727a1.507 1.507 0 1 1-2.132-2.132L9.168 10.7a3.518 3.518 0 0 1 3.724-4.676" />
+            </svg>
+         }
+         {type === 'city'
+            && <svg {...xmlnsProps} width={size} viewBox="0 0 48 48">
+                  <g fill="none">
+                     <path stroke={color} strokeLinecap="round" strokeLinejoin="round" strokeWidth={4} d="M4 42h40"></path>
+                     <rect width={8} height={16} x={8} y={26} stroke={color} strokeLinejoin="round" strokeWidth={4} rx={2}></rect>
+                     <path stroke={color} strokeLinecap="square" strokeLinejoin="round" strokeWidth={4} d="M12 34h1"></path>
+                     <rect width={24} height={38} x={16} y={4} stroke={color} strokeLinejoin="round" strokeWidth={4} rx={2}></rect>
+                     <path fill={color} d="M22 10h4v4h-4zm8 0h4v4h-4zm-8 7h4v4h-4zm8 0h4v4h-4zm0 7h4v4h-4zm0 7h4v4h-4z"></path>
+                  </g>
+               </svg>
+         }
+         {type === 'research'
+            && <svg width={size} viewBox="0 0 48 48" {...xmlnsProps}>
+                  <g fill="none" stroke={color} strokeWidth={4}>
+                     <path strokeLinecap="round" d="M4 7h40M4 23h11M4 39h11"></path>
+                     <path d="M31.5 34a8.5 8.5 0 1 0 0-17a8.5 8.5 0 0 0 0 17Z"></path>
+                     <path strokeLinecap="round" d="m37 32l7 7.05"></path>
+                  </g>
+               </svg>
+         }
+         {type === 'domains'
+            && <svg {...xmlnsProps} width={size} viewBox="0 0 56 56">
+                  <path fill={color} d="M7.328 43.504c.445 0 .914-.14 1.383-.469V17.957c0-.844.164-1.172.914-1.57L31.352 3.87c.07-1.547-.915-2.508-2.25-2.508c-.61 0-1.266.164-1.97.586L7.493 13.246c-2.297 1.336-2.578 1.758-2.578 4.43v22.43c0 2.015.96 3.398 2.414 3.398m9.375 5.414c.422 0 .89-.14 1.383-.469V23.371c0-.914.117-1.148.89-1.57L40.703 9.26c.07-1.523-.89-2.507-2.25-2.507c-.586 0-1.266.187-1.945.562L16.82 18.636c-2.297 1.313-2.555 1.805-2.555 4.43V45.52c0 2.015 1.008 3.398 2.438 3.398m10.031 5.719c.82 0 1.805-.328 2.977-.985l18.375-10.547c2.156-1.242 3-2.53 3-5.156l-.047-21.234c0-2.813-1.008-4.242-2.766-4.242c-.773 0-1.758.304-2.859.937L26.992 24.027c-2.203 1.29-2.977 2.602-2.977 5.157v21.234c0 2.719.961 4.219 2.72 4.219M28 50.067c-.117-.024-.164-.094-.164-.258L28 29.254c0-.89.258-1.36 1.055-1.805l17.742-10.43c.07-.046.14-.046.234-.023c.094.024.164.094.164.258l-.07 20.625c0 .773-.281 1.36-1.055 1.828L28.234 50.043a.284.284 0 0 1-.234.023"></path>
                </svg>
          }
        </span>
